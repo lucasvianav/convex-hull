@@ -1,0 +1,12 @@
+(time complexity)
+
+CONVEX-HULL:
+Graham Scan -> O(n log n)	 | x
+Jarvis March -> O(n h)		 | x
+Monotone Chain -> O(n log n)	 | o
+
+SHUFFLE:
+Fisher-Yates -> O(n)
+
+SORTING:
+QuickSort -> O(n log n)

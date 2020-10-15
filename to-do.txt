@@ -1,0 +1,10 @@
+TADs:
+	Ponto
+	Lista Linear Sequencial
+	Pilha Encadeada e Dinâmica
+
+Algoritmos:
+	Monotone Chain
+	QuickSort + Fisher-Yates Shuffle
+
+main.
