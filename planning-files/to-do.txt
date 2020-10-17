@@ -1,6 +1,6 @@
 TADs:
 	Ponto
-	Lista Linear Sequencial -- Flip
+	Lista Encadeada e Dinâmica -- Flip
 		Funções básicas
 		Função de trocar elementos: swap()
 	Pilha Encadeada e Dinâmica -- Saudável
