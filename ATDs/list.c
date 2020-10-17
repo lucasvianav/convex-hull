@@ -207,3 +207,167 @@ void list_swap(list *l, int i, int j){
 
     return;
 }
+
+// void list_reverse(list **l){
+//     if(*l != NULL && list_getLength(*l) > 1){
+//         list *aux = list_create();
+
+//         for(int i = list_getLength(*l) - 1; i >= 0; i--){
+//             list_append(aux, *(list_get(l, i)));
+//         }
+
+//         list_delete(l);
+
+//         *l = aux;
+//     }
+
+//     return;
+
+// }
+
+// void list_reverse(list *l){
+//     for(int i = 0, j = list_getLength(l)-1; i < j; i++, j--){
+//         list_swap(l, i, j);
+//     }
+
+//     return;
+
+// }
+
+void auxReverse(node *previous, node *current){
+    if(current != NULL && current->next != NULL){ auxReverse(current, current->next); }
+
+    current->next = previous;
+
+    return;
+    
+}
+
+void list_reverse(list *l){
+    if(l != NULL && list_getLength(l) > 1){
+        auxReverse(NULL, l->start);
+    }
+
+    node *tmp = l->start;
+    l->start = l->end;
+    l->end = tmp;
+
+    return;
+}
+
+void list_sort(list *l, char key, int leftIndex, int rightIndex){
+    if(leftIndex == 0 && rightIndex == list_getLength(l)-1 && (key == 'x' || key == 'X' || key == 'y' || key == 'Y')){
+        // shuffles   
+    }
+
+    if(leftIndex < rightIndex && (key == 'x' || key == 'X' || key == 'y' || key == 'Y')){
+        int left = leftIndex, right = rightIndex;
+
+        int middleIndex = (int)((rightIndex+leftIndex)/2);
+        point *pivotPoint = list_get(l, middleIndex);
+        double pivot;
+
+        // Sorts from left to right
+        if(key == 'x'){
+            pivot = pivotPoint->x;
+
+            // Separes the vector/subvector into two partitions
+            while(True){
+                // Selects elements from the left that are >= to the pivot
+                while(list_get(l, left)->x < pivot){ left++; }
+
+                // Selects elements from the right that are <= to the pivot
+                while(list_get(l, right)->x > pivot){ right--; }
+
+                // If the swapping the above selected elements is worth it, do it
+                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
+
+                // If the swap is not worth it, the vector was successfully partitionted
+                else{ break; }
+
+            }
+
+            // Sorts the partitions
+            list_sort(l, key, leftIndex, right);
+            list_sort(l, key, right+1, rightIndex);
+        }
+
+        // Sorts from right to left
+        else if(key == 'X'){
+            pivot = pivotPoint->x;
+
+            // Separes the vector/subvector into two partitions
+            while(True){
+                // Selects elements from the left that are <= to the pivot
+                while(list_get(l, left)->x > pivot){ left++; }
+
+                // Selects elements from the right that are >= to the pivot
+                while(list_get(l, right)->x < pivot){ right--; }
+
+                // If the swapping the above selected elements is worth it, do it
+                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
+
+                // If the swap is not worth it, the vector was successfully partitionted
+                else{ break; }
+
+            }
+
+            // Sorts the partitions
+            list_sort(l, key, leftIndex, right);
+            list_sort(l, key, right+1, rightIndex);
+        }
+
+        // Sorts from bottom to top
+        else if(key == 'y'){
+            pivot = pivotPoint->y;
+
+            // Separes the vector/subvector into two partitions
+            while(True){
+                // Selects elements from the left that are >= to the pivot
+                while(list_get(l, left)->y < pivot){ left++; }
+
+                // Selects elements from the right that are <= to the pivot
+                while(list_get(l, right)->y > pivot){ right--; }
+
+                // If the swapping the above selected elements is worth it, do it
+                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
+
+                // If the swap is not worth it, the vector was successfully partitionted
+                else{ break; }
+
+            }
+
+            // Sorts the partitions
+            list_sort(l, key, leftIndex, right);
+            list_sort(l, key, right+1, rightIndex);
+        }
+
+        // Sorts from top to bottom
+        else if(key == 'Y'){
+            pivot = pivotPoint->y;
+
+            // Separes the vector/subvector into two partitions
+            while(True){
+                // Selects elements from the left that are <= to the pivot
+                while(list_get(l, left)->y > pivot){ left++; }
+
+                // Selects elements from the right that are >= to the pivot
+                while(list_get(l, right)->y < pivot){ right--; }
+
+                // If the swapping the above selected elements is worth it, do it
+                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
+
+                // If the swap is not worth it, the vector was successfully partitionted
+                else{ break; }
+
+            }
+
+            // Sorts the partitions
+            list_sort(l, key, leftIndex, right);
+            list_sort(l, key, right+1, rightIndex);
+        }
+    }
+
+    return;
+
+}
