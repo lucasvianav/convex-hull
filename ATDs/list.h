@@ -29,12 +29,15 @@ void list_print(list *l);
 // Reverses the element's order
 void list_reverse(list *l);
 
+// Shuffles the list using the Fisher-Yates algorithm
+void list_shuffle(list *l);
+
 // Sorts the list using QuickSort
 // key == 'x': sorts from left to right
 // key == 'X': sorts from right to left
 // key == 'y': sorts from bottom to top
 // key == 'Y': sorts from top to bottom
-void list_sort(list *l, char key, int leftIndex, int rightIndex);
+void list_sort(list *l, char key);
 
 // Return True if the list is empty or False if it isn't
 boolean list_isEmpty(list *l);
