@@ -417,3 +417,31 @@ void list_sort(list *l, char key){
 
     return;
 }
+
+list *list_copy(list *l){
+    if(l != NULL){
+        list *copy = list_create();
+        int length = list_getLength(l);
+
+        for(int i = 0; i < length; i++){
+            list_append(copy, *list_get(l, i));
+        }
+
+        return copy;
+    }
+
+    else{ return NULL; }
+
+}
+
+void list_extend(list *l, list *target){
+    if(l != NULL && target != NULL){
+        int length = list_getLength(target);
+
+        for(int i = 0; i < length; i++){
+            list_append(l, *list_get(target, i));
+        }
+    }
+
+    return;
+}

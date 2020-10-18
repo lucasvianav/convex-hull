@@ -8,6 +8,9 @@ typedef struct list_ list;
 // Creates a list and returns it's pointer
 list *list_create();
 
+// Returns the pointer to a deep copy of the given list
+list *list_copy(list *l);
+
 // Deallocates the list and all of it's nodes
 void list_delete(list **l);
 
@@ -16,6 +19,9 @@ void list_insert(list *l, point p, int index);
 
 // Appends an element to the end of list
 void list_append(list *l, point p);
+
+// Append all elements from target-list to l
+void list_extend(list *l, list *target);
 
 // Removes the element at the specified index from the list
 void list_remove(list *l, int index);
