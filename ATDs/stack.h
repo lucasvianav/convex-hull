@@ -19,13 +19,16 @@ point* stack_pop(stack* s);
 // Returns the stack stack_getLength
 int stack_getLength(stack* s);
 
-// Returns the stack_top node from the stack
+// Returns if the stack is empty or not
+int stack_is_empty(stack *s);
+
+// Returns the stack_top point from the stack
 point *stack_top(stack* s);
 
 // Returns the stack second element from the top
 point* stack_secondFromTop(stack* s);
 
-// FALTA IMPLEMENTAR
+// Deletes the whole stack
 void stack_delete(stack **s);
 
 #endif
