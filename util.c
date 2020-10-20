@@ -1,9 +1,13 @@
-#define boolean int
-#define True 1
-#define False 0
+#include "util.h"
 
-// POINT (x,y)
-typedef struct {
-    double x;
-    double y;
-} point;
+boolean isCCW(point p1, point p2, point p3){
+    double crossProduct = p1.x * p2.y + p1.y * p3.x + p2.x * p3.y - p3.x * p2.y - p3.y * p1.x - p2.x * p1.y;
+
+    if(crossProduct < 0){
+        return True;
+    }
+
+    else{
+        return False;
+    }
+}

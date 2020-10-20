@@ -437,9 +437,25 @@ list *list_copy(list *l){
 void list_extend(list *l, list *target){
     if(l != NULL && target != NULL){
         int length = list_getLength(target);
+        node *tmp = target->start;
 
         for(int i = 0; i < length; i++){
-            list_append(l, *list_get(target, i));
+            list_append(l, tmp->p);
+
+            tmp = tmp->next;
+        }
+    }
+
+    return;
+}
+
+void list_extendStack(list *l, stack *target){
+    if(l != NULL && target != NULL){
+        stack *s = stack_copy(target);
+        int length = stack_getLength(s);
+
+        for(int i = 0; i < length; i++){
+            list_append(l, *stack_pop(s));
         }
     }
 

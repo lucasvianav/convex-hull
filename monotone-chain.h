@@ -1,7 +1,5 @@
 #include "./ATDs/list.h"
-#include "./ATDs/stack.h"
-#include "util.c"
 
 // Applies the Monotone Chain algorithm to calculate a group of points's convex hull
-// Returns a list with the hull's vertices
+// Returns a list with the hull's vertices in counter-clockwise
 list *convexHull(list *allPoints);

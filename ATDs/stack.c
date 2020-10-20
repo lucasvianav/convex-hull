@@ -70,7 +70,7 @@ point *stack_top(stack* s){
     return &(s->top->p);
 }
 
-point* stack_second_from_top(stack* s){
+point* stack_secondFromTop(stack* s){
 
     if (s == NULL) return NULL;
 
@@ -78,6 +78,22 @@ point* stack_second_from_top(stack* s){
 
 }
 
+stack *stack_copy(stack *s){
+    if(s != NULL){
+        stack *copy = stack_create();
+        int length = stack_getLength(s);
 
+        node *tmp = s->top;
 
+        for(int i = 0; i < length; i++){
+            stack_push(copy, tmp->p);
 
+            tmp = tmp->next;
+        }
+
+        return copy;
+    }
+
+    return NULL;
+
+}

@@ -1,12 +1,14 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include "../util.c"
+#include "../util.h"
 
 typedef struct stack_ stack;
 
 // Creates a stack and returns it's pointer
 stack* stack_create();
+
+stack *stack_copy(stack *s);
 
 // Inserts a new node 
 void stack_push(stack* s,point p);
@@ -21,7 +23,7 @@ int stack_getLength(stack* s);
 point *stack_top(stack* s);
 
 // Returns the stack second element from the top
-point* stack_second_from_top(stack* s);
+point* stack_secondFromTop(stack* s);
 
 
 #endif

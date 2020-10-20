@@ -1,7 +1,8 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "../util.c"
+#include "../util.h"
+#include "stack.h"
 
 typedef struct list_ list;
 
@@ -22,6 +23,9 @@ void list_append(list *l, point p);
 
 // Append all elements from target-list to l
 void list_extend(list *l, list *target);
+
+// Append all elements from target-stack to l
+void list_extendStack(list *l, stack *target);
 
 // Removes the element at the specified index from the list
 void list_remove(list *l, int index);
