@@ -42,13 +42,20 @@ void stack_push(stack* s,point p){
 }
 
 point* stack_pop(stack* s){
-    
-    if(s == NULL) return NULL;
 
-    node* aux = s->top;
-    s->top = s->top->next;
-    point* return_point = &(aux->p);
+    if((s == NULL) || stack_is_empty(s)) return NULL;
+
+    int x = s->top->p.x;
+    int y = s->top->p.y;
+
+    point* return_point = (point*)malloc(sizeof(point));
+    return_point->x = x;
+    return_point->y = y;
+    
+    node* aux = s->top; 
+    s->top = aux->next;
     free(aux);
+    aux = NULL;
 
     s->size = (s->size) - 1;
     
@@ -63,6 +70,14 @@ int stack_getLength(stack* s){
 
 }
 
+int stack_is_empty(stack *s){
+
+    if(s == NULL) return -1;
+
+    return (s->size == 0);
+
+}
+
 point *stack_top(stack* s){
     
     if(s == NULL) return NULL;
@@ -74,7 +89,7 @@ point* stack_secondFromTop(stack* s){
 
     if (s == NULL) return NULL;
 
-    return &(s->top->next);
+    return &(s->top->next->p);
 
 }
 
@@ -95,5 +110,27 @@ stack *stack_copy(stack *s){
     }
 
     return NULL;
+
+}
+
+void stack_delete(stack **s){
+
+    if ((s == NULL) || stack_is_empty(*s)) return;
+
+    node* current = (*s)->top;
+    node* next;
+
+    while(current != NULL){
+
+        next = current->next;
+        free(current);
+        current = next;
+
+    }
+
+    free(*s);
+    *s = NULL;
+
+    return;
 
 }
