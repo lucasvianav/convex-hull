@@ -55,7 +55,7 @@ void list_insert(list *l, point p, int index){
             else{ l->start->next->previous = l->start; }
         }
 
-        else if(index == list_getLength(l) - 1){
+        else if(index == list_getLength(l)){
             newNode->previous = l->end;
             newNode->next = NULL;
             l->end->next = newNode;
@@ -169,8 +169,8 @@ void list_remove(list *l, int index){
         if(index == 0){
             target = l->start;
 
-            l->start->previous = NULL;
             l->start = target->next;
+            l->start->previous = NULL;
         }
 
         else if(index == list_getLength(l) - 1){
@@ -181,7 +181,19 @@ void list_remove(list *l, int index){
         }
         
         else{
-            target = list_get(l, index);
+            // If the target-node is in the list's first half
+            if(index <= (int)list_getLength(l)/2){
+                target = l->start;
+
+                for(int i = 0; i < index; i++){ target = target->next; }
+            }
+
+            // If the target-node is in the list's second half
+            else{
+                target = l->end;
+
+                for(int i = list_getLength(l) - 1; i > index; i--){ target = target->previous; }
+            }
 
             target->next->previous = target->previous;
             target->previous->next = target->next;
@@ -189,9 +201,10 @@ void list_remove(list *l, int index){
 
         // Deallocates the target-node
         free(target);
+        target = NULL;
 
         // Decrements the length counter
-        l->length--;
+        (l->length)--;
 
     }
 
@@ -273,6 +286,7 @@ void list_swap(list *l, int i, int j){
     if(l != NULL && i < list_getLength(l) && j < list_getLength(l) && i != j){
         node *node_i; // Node at index i
         node *node_j; // Node at index j
+
         int middleIndex = (int)list_getLength(l)/2, k;
 
         // Assures that i < j
@@ -284,7 +298,7 @@ void list_swap(list *l, int i, int j){
 
         // Gets the above node variables pointing to it's corresponding nodes
         if(i > middleIndex && j > middleIndex){
-            int k = list_getLength(2);
+            int k = list_getLength(l) - 1;
             node_j = l->end;
             while(k > j){
                 node_j = node_j->previous;
@@ -346,7 +360,7 @@ void list_shuffle(list *l){
         int currentIndex = list_getLength(l)-1;
         
         // Auxiliar node variable in order to get the target node
-        node *aux;
+        node *aux = l->start;
         int auxIndex = 0;
 
         // Target node's index (node to be swapped with the current one)
@@ -360,7 +374,7 @@ void list_shuffle(list *l){
 
             // Calculates which indexed node is the closest to targetIndex-node
             distanceCurrent = abs(targetIndex - currentIndex);
-            distanceEnd = abs(targetIndex - list_getLength(l) - 1);
+            distanceEnd = abs(targetIndex - (list_getLength(l) - 1));
             minDist = min4(distanceCurrent, abs(targetIndex - auxIndex), targetIndex, distanceEnd);
 
             // targetIndex-node is closest from the current-node
@@ -384,8 +398,14 @@ void list_shuffle(list *l){
             // Now, aux is the indexed node closest to targetIndex-node
 
             // Gets targetIndex-node to aux
-            while(auxIndex < targetIndex){ aux = aux->next; } // If it's on the right
-            while(auxIndex > targetIndex){ aux = aux->previous; } // If it's on the left
+            while(auxIndex < targetIndex){ // If it's on the right
+                aux = aux->next; 
+                auxIndex++;
+            } 
+            while(auxIndex > targetIndex){ // If it's on the left
+                aux = aux->previous; 
+                auxIndex--;
+            } 
 
             pointSwap(aux, currentNode);
 
@@ -400,144 +420,113 @@ void list_shuffle(list *l){
 
 // Local function that quick sorts a given list
 void quickSort(list *l, char key, int leftIndex, int rightIndex){
-    if(leftIndex < rightIndex){
+    if(0 <= leftIndex && leftIndex < rightIndex && rightIndex < list_getLength(l)){
         int left = leftIndex; // Current index on the left
         int right = rightIndex; // Current index on the right
 
-        node *leftNode = l->start; // Current node on the left
-        node *rightNode = l->end; // Current node on the right
+        node *leftNode; // Current node on the left
+        node *rightNode; // Current node on the right
 
-        int middleIndex = (int)((rightIndex+leftIndex)/2);
+        // Lists's middle index
+        int middleIndex = (int)list_getLength(l)/2;
+        // Auxiliar index variable
+        int k;
+
+        // Makes leftNode point to the leftmost node in the partition
+        // And rightNode point to the rightmost node in the partition
+        if(leftIndex > middleIndex && rightIndex > middleIndex){ // If both nodes are in the list's second half
+            int k = list_getLength(l) - 1;
+            rightNode = l->end;
+            while(k > rightIndex){
+                rightNode = rightNode->previous;
+                k--;
+            }
+
+            leftNode = rightNode;
+            while(k > leftIndex){
+                leftNode = leftNode->previous;
+                k--;
+            }
+        }
+
+        // If the left node is in the list's first quarter and the right node in the second half
+        // Or they're in the second and last quarters respectively
+        else if((leftIndex <= middleIndex/2 && rightIndex > middleIndex) || (leftIndex >= middleIndex/2 && rightIndex >= 3/2*middleIndex)){
+            k = 0;
+            leftNode = l->start;
+            while(k < leftIndex){
+                leftNode = leftNode->next;
+                k++;
+            }
+
+            k = list_getLength(l) - 1;
+            rightNode = l->end;
+            while(k > rightIndex){
+                rightNode = rightNode->previous;
+                k--;
+            }
+        }
+        
+        // If both nodes are in the list's first half
+        // Or if they're in neighboring quarters (2nd and 3rd)
+        else{
+            int k = 0;
+            leftNode = l->start;
+            while(k < leftIndex){
+                leftNode = leftNode->next;
+                k++;
+            }
+
+            rightNode = leftNode;
+            while(k < rightIndex){
+                rightNode = rightNode->next;
+                k++;
+            }
+        }
+
+        // Now leftNode points to the partition's leftmost node
+        // And rightNode points to the partition's rightmost node
+
+        // Partition's middle index
+        middleIndex = (int)((rightIndex+leftIndex)/2);
         point pivot = *list_get(l, middleIndex);
 
-        // Sorts from left to right (and bottom to top if there's a draw)
-        if(key == 'x'){
-            // Separes the vector/subvector into two partitions
-            while(True){
-                // Selects elements from the left that are > to the pivot
-                // for(point *current = list_get(l, left); current->x <= pivot.x; current = list_get(l, ++left)){
-                while(leftNode->p.x <= pivot.x){
-                    // If there's a draw in x, sort by y
-                    if(leftNode->p.x == pivot.x && leftNode->p.y >= pivot.y){
-                        break;
-                    }
+        // Separes the vector/subvector into two partitions
+        while(True){
 
-                    leftNode = leftNode->next;
-                    left++;
-                }
-
-                // Selects elements from the right that are < to the pivot
-                for(point *current = list_get(l, right); current->x >= pivot.x; current = list_get(l, --right)){
-                    if(current->x == pivot.x && current->y <= pivot.y){
-                        break;
-                    }
-                }
-
-                // If the swapping the above selected elements is worth it, do it
-                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
-
-                // If the swap is not worth it, the vector was successfully partitionted
-                else{ break; }
-
+            // Selects elements from the left
+            while( left <= rightIndex && cmpPoints(leftNode->p, pivot, key) ){
+                leftNode = leftNode->next;
+                left++;
             }
 
-            // Sorts the partitions
-            quickSort(l, key, leftIndex, right);
-            quickSort(l, key, right+1, rightIndex);
-        }
-
-        // Sorts from right to left (and bottom to top if there's a draw)
-        else if(key == 'X'){
-            // Separes the vector/subvector into two partitions
-            while(True){
-                // Selects elements from the left that are < to the pivot
-                for(point *current = list_get(l, left); current != NULL && current->x >= pivot.x; current = list_get(l, ++left)){
-                    if(current->x == pivot.x && current->y >= pivot.y){
-                        break;
-                    }
-                }
-
-                // Selects elements from the right that are > to the pivot
-                for(point *current = list_get(l, right); current != NULL && current->x <= pivot.x; current = list_get(l, --right)){
-                    if(current->x == pivot.x && current->y <= pivot.y){
-                        break;
-                    }
-                }
-
-                // If the swapping the above selected elements is worth it, do it
-                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
-
-                // If the swap is not worth it, the vector was successfully partitionted
-                else{ break; }
-
+            // Selects elements from the right
+            while( right >= leftIndex && cmpPoints(rightNode->p, pivot, toggleChar(key)) ){
+                rightNode = rightNode->previous;
+                right--;
             }
 
-            // Sorts the partitions
-            quickSort(l, key, leftIndex, right);
-            quickSort(l, key, right+1, rightIndex);
-        }
+            // If swapping the above selected elements is worth it, do it
+            if(left < right){ 
+                pointSwap(leftNode, rightNode); // Swap
 
-        // Sorts from bottom to top (and left to right if there's a draw)
-        else if(key == 'y'){
-            // Separes the vector/subvector into two partitions
-            while(True){
-                // Selects elements from the left that are > to the pivot
-                for(point *current = list_get(l, left); current != NULL && current->y <= pivot.y; current = list_get(l, ++left)){
-                    if(current->y == pivot.y && current->x >= pivot.x){
-                        break;
-                    }
-                }
+                // And pass to the next points
+                leftNode = leftNode->next;
+                left++;
 
-                // Selects elements from the right that are < to the pivot
-                for(point *current = list_get(l, right); current != NULL && current->y >= pivot.y; current = list_get(l, --right)){
-                    if(current->y == pivot.y && current->x <= pivot.x){
-                        break;
-                    }
-                }
-
-                // If the swapping the above selected elements is worth it, do it
-                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
-
-                // If the swap is not worth it, the vector was successfully partitionted
-                else{ break; }
-
+                rightNode = rightNode->previous;
+                right--;
             }
 
-            // Sorts the partitions
-            quickSort(l, key, leftIndex, right);
-            quickSort(l, key, right+1, rightIndex);
+            // If the swap is not worth it, the vector was successfully partitionted
+            else{ break; }
+
         }
 
-        // Sorts from top to bottom (and left to right if there's a draw)
-        else if(key == 'Y'){
-            // Separes the vector/subvector into two partitions
-            while(True){
-                // Selects elements from the left that are < to the pivot
-                for(point *current = list_get(l, left); current != NULL && current->y >= pivot.y; current = list_get(l, ++left)){
-                    if(current->y == pivot.y && current->x >= pivot.x){
-                        break;
-                    }
-                }
+        // Sorts the partitions
+        quickSort(l, key, leftIndex, right);
+        quickSort(l, key, right+1, rightIndex);
 
-                // Selects elements from the right that are > to the pivot
-                for(point *current = list_get(l, right); current != NULL && current->y <= pivot.y; current = list_get(l, --right)){
-                    if(current->y == pivot.y && current->x <= pivot.x){
-                        break;
-                    }
-                }
-
-                // If the swapping the above selected elements is worth it, do it
-                if(left < right){ list_swap(l, left++, right--); } // And pass to the next element
-
-                // If the swap is not worth it, the vector was successfully partitionted
-                else{ break; }
-
-            }
-
-            // Sorts the partitions
-            quickSort(l, key, leftIndex, right);
-            quickSort(l, key, right+1, rightIndex);
-        }
     }
 
     return;
@@ -545,9 +534,11 @@ void quickSort(list *l, char key, int leftIndex, int rightIndex){
 }
 
 void list_sort(list *l, char key){
-    if(l != NULL && list_getLength(l) > 1 && (key == 'x' || key == 'X' || key == 'y' || key == 'Y')){
+    if(l != NULL && list_getLength(l) > 1){
+        if(key != 'x' && key != 'X' && key != 'y' && key != 'Y'){ key = 'x'; }
+
         list_shuffle(l);
-        quickSort(l, key, 0, list_getLength(l) - 1);
+        quickSort(l, key, 0, list_getLength(l)-1);
     }
 
     return;

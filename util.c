@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <ctype.h>
 #include "util.h"
 
 boolean isCCW(point p1, point p2, point p3){
@@ -19,28 +21,57 @@ int min4(int x, int y, int z, int w){
 
     else if(z <= x && z <= y && z <= w){ return z; }
 
-    else if(w <= x && w <= y && w <= z){ return w; }
+    else{ return w; }
 }
 
 boolean cmpPoints(point p1, point p2, char key){
     if(key == 'x' || key == 'X' || key == 'y' || key == 'Y'){
-        
-        if( key == 'x' && ( p1.x < p2.x || (p1.x == p2.x && p1.y < p2.y) ) ){
+    
+        if( key == 'x' && p1.x <= p2.x){
+            if(p1.x == p2.x && p1.y >= p2.y){
+                return False;
+            }
+
             return True;
         }
         
-        if( key == 'X' && ( p1.x > p2.x || (p1.x == p2.x && p1.y < p2.y) ) ){
+        if( key == 'X' && p1.x >= p2.x){
+            if(p1.x == p2.x && p1.y <= p2.y){
+                return False;
+            }
+
             return True;
         }
         
-        if( key == 'y' && ( p1.y < p2.y || (p1.y == p2.y && p1.x < p2.x) ) ){
+        if( key == 'y' && p1.y <= p2.y){
+            if(p1.y == p2.y && p1.x >= p2.x){
+                return False;
+            }
+
             return True;
         }
         
-        if( key == 'Y' && ( p1.y < p2.y || (p1.y == p2.y && p1.x < p2.x) ) ){
+        if( key == 'Y' && p1.y >= p2.y){
+            if(p1.y == p2.y && p1.x <= p2.x){
+                return False;
+            }
+
             return True;
         }
+
     }
 
     return False;
+}
+
+void printPoint(point p){
+    printf("(%.2lf, %.2lf)\n", p.x, p.y);
+
+    return;
+}
+
+char toggleChar(char c){
+    if(isupper(c)){ return tolower(c); }
+
+    else{ return toupper(c); }
 }
