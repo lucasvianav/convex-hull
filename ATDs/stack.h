@@ -9,16 +9,16 @@ typedef struct stack_ stack;
 stack* stack_create();
 
 // Inserts a new node 
-void push(stack* s,point p);
+void stack_push(stack* s,point p);
 
-// Removes the top node from the stack
-void pop(stack* s);
+// Removes the stack_top node from the stack
+void stack_pop(stack* s);
 
-// Returns the stack size
-int size(stack* s);
+// Returns the stack stack_getLength
+int stack_getLength(stack* s);
 
-// Returns the top node from the stack
-node* top(stack* s);
+// Returns the stack_top node from the stack
+point *stack_top(stack* s);
 
 
 #endif
