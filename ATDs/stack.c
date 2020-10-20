@@ -41,17 +41,18 @@ void stack_push(stack* s,point p){
     
 }
 
-void stack_pop(stack* s){
+point* stack_pop(stack* s){
     
-    if(s == NULL) return;
+    if(s == NULL) return NULL;
 
     node* aux = s->top;
     s->top = s->top->next;
+    point* return_point = &(aux->p);
     free(aux);
 
     s->size = (s->size) - 1;
     
-    return;
+    return return_point;
 }
 
 int stack_getLength(stack* s){
@@ -67,6 +68,14 @@ point *stack_top(stack* s){
     if(s == NULL) return NULL;
 
     return &(s->top->p);
+}
+
+point* stack_second_from_top(stack* s){
+
+    if (s == NULL) return NULL;
+
+    return &(s->top->next);
+
 }
 
 
