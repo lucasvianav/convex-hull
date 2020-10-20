@@ -53,12 +53,8 @@ list *convexHull(list *allPoints){
         stack_pop(upperHull);
 
         // Concatenates the stacks into the complete hull (counter-clockwise order)
-        list_extendStack(hull, lowerHull);
-        list_extendStack(hull, upperHull);
-
-        // Freeing memory
-        stack_delete(lowerHull);
-        stack_delete(upperHull);
+        list_attachStack(hull, lowerHull);
+        list_attachStack(hull, upperHull);
 
         return hull;
 
