@@ -25,5 +25,7 @@ point *stack_top(stack* s);
 // Returns the stack second element from the top
 point* stack_secondFromTop(stack* s);
 
+// FALTA IMPLEMENTAR
+void stack_delete(stack **s);
 
 #endif

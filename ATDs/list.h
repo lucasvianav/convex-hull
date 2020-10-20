@@ -25,7 +25,12 @@ void list_append(list *l, point p);
 void list_extend(list *l, list *target);
 
 // Append all elements from target-stack to l
+// Leaves target-stack unaltered
 void list_extendStack(list *l, stack *target);
+
+// Append all elements from target-stack to l
+// When completed, deletes the target-stack
+void list_attachStack(list *l, stack *target);
 
 // Removes the element at the specified index from the list
 void list_remove(list *l, int index);

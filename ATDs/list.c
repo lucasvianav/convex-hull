@@ -459,5 +459,21 @@ void list_extendStack(list *l, stack *target){
         }
     }
 
+    stack_delete(&s);
+
+    return;
+}
+
+void list_extendStack(list *l, stack *target){
+    if(l != NULL && target != NULL){
+        int length = stack_getLength(target);
+
+        for(int i = 0; i < length; i++){
+            list_append(l, *stack_pop(target));
+        }
+    }
+
+    stack_delete(&target);
+
     return;
 }
