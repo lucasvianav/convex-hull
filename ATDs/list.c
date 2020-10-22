@@ -725,3 +725,101 @@ void impressao_anti_horaria(point* pontos, int indice,int tamanho){
     
     return;
 }
+
+
+int indice_esquerda_lista(list* l){
+
+    int tamanho = list_getLength(l);
+
+    int mais_esquerda = 0;
+    point ponto_mais_esquerda = l->start->p;
+    
+    node* aux = l->start;
+
+    for(int i = 0; i < tamanho; i++){
+        if(aux->p.x < ponto_mais_esquerda.x){
+            mais_esquerda = i;
+            ponto_mais_esquerda = aux->p;
+        }
+        else if(aux->p.x == ponto_mais_esquerda.x){
+            if(aux->p.y < ponto_mais_esquerda.y){
+                mais_esquerda = i;
+            }
+        }
+        aux = aux->next;
+    }
+    return mais_esquerda;
+}
+
+int indice_cima_lista(list* l){
+
+    int tamanho = list_getLength(l);
+
+    int mais_acima = 0;
+    point ponto_mais_acima = l->start->p;
+    
+    node* aux = l->start;
+
+    for(int i = 0; i < tamanho; i++){
+        if(aux->p.y > ponto_mais_acima.y){
+            mais_acima = i;
+            ponto_mais_acima = aux->p;
+        }
+        else if(aux->p.y == ponto_mais_acima.y){
+            if(aux->p.x < ponto_mais_acima.x){
+                mais_acima = i;
+            }
+        }
+        aux = aux->next;
+    }
+    return mais_acima;
+}
+
+int indice_baixo_lista(list* l){
+
+    int tamanho = list_getLength(l);
+
+    int mais_abaixo = 0;
+    point ponto_mais_abaixo = l->start->p;
+    
+    node* aux = l->start;
+
+    for(int i = 0; i < tamanho; i++){
+        if(aux->p.y < ponto_mais_abaixo.y){
+            mais_abaixo = i;
+            ponto_mais_abaixo = aux->p;
+        }
+        else if(aux->p.y == ponto_mais_abaixo.y){
+            if(aux->p.x < ponto_mais_abaixo.x){
+                mais_abaixo = i;
+            }
+        }
+        aux = aux->next;
+    }
+    return mais_abaixo;
+    
+}
+
+int indice_direita_lista(list* l){
+
+    int tamanho = list_getLength(l);
+
+    int mais_direita = 0;
+    point ponto_mais_direita = l->start->p;
+    
+    node* aux = l->start;
+
+    for(int i = 0; i < tamanho; i++){
+        if(aux->p.x > ponto_mais_direita.x){
+            mais_direita = i;
+            ponto_mais_direita = aux->p;
+        }
+        else if(aux->p.x == ponto_mais_direita.x){
+            if(aux->p.y < ponto_mais_direita.y){
+                mais_direita = i;
+            }
+        }
+        aux = aux->next;
+    }
+    return mais_direita;
+}

@@ -41,7 +41,6 @@ int main(){
 
     // Array de pontos que recebe os pontos da lista fecho
     point* lista_de_pontos = point_list(fecho);
-
     
     // Switch case referente ao ponto que a impressão será iniciada
     switch(inicio_impressao[0]){

@@ -91,4 +91,14 @@ void impressao_horaria(point* pontos, int indice,int tamanho);
 // Prints counterclockwise
 void impressao_anti_horaria(point* pontos, int indice,int tamanho);
 
+// Adaptações pra lista
+
+int indice_esquerda_lista(list* l);
+
+int indice_direita_lista(list* l);
+
+int indice_cima_lista(list* l);
+
+int indice_baixo_lista(list* l);
+
 #endif
