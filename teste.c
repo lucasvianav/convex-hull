@@ -26,10 +26,20 @@ int main(){
         list_append(lista_pontos,ponto_atual);
     }
 
-    printf("Mais de baixo: %d\n",indice_baixo_lista(lista_pontos));
-    printf("Mais de cima: %d\n",indice_cima_lista(lista_pontos));
-    printf("Mais da esquerda: %d\n",indice_esquerda_lista(lista_pontos));
-    printf("Mais da direita: %d\n",indice_direita_lista(lista_pontos));
+    list* fecho = convexHull(lista_pontos);
+
+    list_print(fecho);
+
+    printf("Mais de baixo: %d\n",indice_baixo_lista(fecho));
+    printf("Mais de cima: %d\n",indice_cima_lista(fecho));
+    printf("Mais da esquerda: %d\n",indice_esquerda_lista(fecho));
+    printf("Mais da direita: %d\n",indice_direita_lista(fecho));
+
+    printf("Impressao antihoraria:\n");
+    lista_impressao_anti_horaria(fecho,indice_baixo_lista(fecho));
+    printf("Impressao horaria:\n");
+    lista_impressao_horaria(fecho,indice_baixo_lista(fecho));
+    
 
     return 0;
 }

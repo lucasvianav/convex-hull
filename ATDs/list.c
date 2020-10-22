@@ -612,119 +612,6 @@ void list_attachStack(list *l, stack *target){
     return;
 }
 
-point* point_list(list*l){
-
-    int size = list_getLength(l);
-
-    point* point_list = malloc(size * sizeof(point));
-
-    node* aux = l->start;
-
-    for(int i  = 0; i < size; i++){
-        
-        point_list[i] = aux->p;
-        aux = aux->next;
-    }
-
-    return point_list;
-
-}
-
-
-int indice_esquerda(point* p,int tamanho){
-    
-    int mais_esquerda = 0;
-
-    for(int i = 0; i < tamanho; i++){
-        if(p[i].x < p[mais_esquerda].x){
-            mais_esquerda = i;
-        }
-        else if(p[i].x == p[mais_esquerda].x){
-            if(p[i].y < p[mais_esquerda].y){
-                mais_esquerda = i;
-            }
-        }
-    }
-    return mais_esquerda;
-}
-
-int indice_direita(point* p, int tamanho){
-
-    int mais_direita = 0;
-
-    for(int i = 0; i < tamanho; i++){
-        if(p[i].x > p[mais_direita].x){
-            mais_direita = i;
-        }
-        else if(p[i].x == p[mais_direita].x){
-            if(p[i].y < p[mais_direita].y){
-                mais_direita = i;
-            }
-        }
-    }
-    return mais_direita;
-    
-}
-
-int indice_cima(point* p,int tamanho){
-    int mais_acima = 0;
-
-    for(int i = 0; i < tamanho; i++){
-        if(p[i].y > p[mais_acima].y){
-            mais_acima = i;
-        }
-        else if(p[i].y == p[mais_acima].y){
-            if(p[i].x < p[mais_acima].x){
-                mais_acima = i;
-            }
-        }
-    }
-    return mais_acima;
-}
-
-int indice_baixo(point* p,int tamanho){
-    int mais_abaixo = 0;
-
-    for(int i = 0; i < tamanho; i++){
-        if(p[i].y < p[mais_abaixo].y){
-            mais_abaixo = i;
-        }
-        else if(p[i].y == p[mais_abaixo].y){
-            if(p[i].x < p[mais_abaixo].x){
-                mais_abaixo = i;
-            }
-        }
-    }
-    return mais_abaixo;
-    
-}
-
-void impressao_horaria(point* pontos, int indice,int tamanho){
-    
-
-    for (int i = indice; i >= 0 ; i--){
-                printf("%.2f %.2f\n",pontos[i].x,pontos[i].y);
-            }
-
-            for (int i = tamanho - 1; i > indice; i--){
-                printf("%.2f %.2f\n",pontos[i].x,pontos[i].y);
-            } 
-
-    return;
-}
-
-void impressao_anti_horaria(point* pontos, int indice,int tamanho){
-
-    for (int i = indice; i < tamanho ; i++){
-                printf("%.2f %.2f\n",pontos[i].x,pontos[i].y);
-            }
-
-            for (int i = 0; i < indice; i++){
-                printf("%.2f %.2f\n",pontos[i].x,pontos[i].y);
-            }
-    
-    return;
-}
 
 
 int indice_esquerda_lista(list* l){
@@ -822,4 +709,58 @@ int indice_direita_lista(list* l){
         aux = aux->next;
     }
     return mais_direita;
+}
+
+void lista_impressao_anti_horaria(list* l, int indice){
+
+    int tamanho = list_getLength(l);
+
+    int i = 0;
+    node* aux = l->start;
+
+    while(i != indice){
+        aux = aux->next;
+        i++;
+    } 
+
+    for (int i = indice; i < tamanho ; i++){
+                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
+                aux = aux->next;
+            }
+
+            aux = l->start;
+
+            for (int i = 0; i < indice; i++){
+                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
+                aux = aux->next;
+            }
+    
+    return;
+}
+
+void lista_impressao_horaria(list* l, int indice){
+
+    int tamanho = list_getLength(l);
+
+    int i = 0;
+    node* aux = l->start;
+
+    while(i != indice){
+        aux = aux->next;
+        i++;
+    } 
+
+    for (int i = indice; i >= 0 ; i--){
+                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
+                aux = aux->previous;
+            }
+
+            aux = l->end;
+
+            for (int i = tamanho - 1; i > indice; i--){
+                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
+                aux = aux->previous;
+            }
+    
+    return;
 }

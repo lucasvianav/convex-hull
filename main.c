@@ -39,19 +39,17 @@ int main(){
     float porcentagem_fecho = (float)(((float)100 *list_getLength(fecho))/(list_getLength(lista_pontos)));
 
 
-    // Array de pontos que recebe os pontos da lista fecho
-    point* lista_de_pontos = point_list(fecho);
     
     // Switch case referente ao ponto que a impressão será iniciada
     switch(inicio_impressao[0]){
 
         case 'L':
         if(sentido_impressao == 0){
-            impressao_horaria(lista_de_pontos,indice_esquerda(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_horaria(fecho,indice_esquerda_lista(fecho));
         }
 
         else if(sentido_impressao == 1){
-            impressao_anti_horaria(lista_de_pontos,indice_esquerda(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_anti_horaria(fecho,indice_esquerda_lista(fecho));
         }
             
         break;
@@ -59,23 +57,22 @@ int main(){
         case 'R':
 
         if(sentido_impressao == 0){
-            impressao_horaria(lista_de_pontos,indice_direita(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_horaria(fecho,indice_direita_lista(fecho));
         }
 
         else if(sentido_impressao == 1){
-            impressao_anti_horaria(lista_de_pontos,indice_direita(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_anti_horaria(fecho,indice_direita_lista(fecho));
         }
-        
         break;
         
         case 'D':
 
         if(sentido_impressao == 0){
-            impressao_horaria(lista_de_pontos,indice_baixo(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+           lista_impressao_horaria(fecho,indice_baixo_lista(fecho));
         }
 
         else if(sentido_impressao == 1){
-            impressao_anti_horaria(lista_de_pontos,indice_baixo(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_anti_horaria(fecho,indice_baixo_lista(fecho));
         }
         
         break;
@@ -83,11 +80,11 @@ int main(){
         case 'U':
 
         if(sentido_impressao == 0){
-            impressao_horaria(lista_de_pontos,indice_cima(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+            lista_impressao_horaria(fecho,indice_cima_lista(fecho));
         }
 
         else if(sentido_impressao == 1){
-            impressao_anti_horaria(lista_de_pontos,indice_cima(lista_de_pontos,list_getLength(fecho)),list_getLength(fecho));
+           lista_impressao_anti_horaria(fecho,indice_cima_lista(fecho));
         }
         
         break;
