@@ -44,6 +44,7 @@ void list_print(list *l);
 // Reverses the element's order
 void list_reverse(list *l);
 
+
 // Shuffles the list using the Fisher-Yates algorithm
 void list_shuffle(list *l);
 
@@ -66,5 +67,26 @@ int list_search(list *l, point p);
 
 // Returns the list's length
 int list_getLength(list *l);
+
+// Returns a pointer to the array of points
+point* point_list(list*l);
+
+// Returns left element index from the array
+int indice_esquerda(point* p,int tamanho);
+
+// Returns right element index from the array
+int indice_direita(point* p,int tamanho);
+
+// Returns upper element index from the array
+int indice_cima(point* p,int tamanho);
+
+// Returns lower element index from the array
+int indice_baixo(point* p,int tamanho);
+
+// Prints clockwise
+void impressao_horaria(point* pontos, int indice,int tamanho);
+
+// Prints counterclockwise
+void impressao_anti_horaria(point* pontos, int indice,int tamanho);
 
 #endif

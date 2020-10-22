@@ -57,8 +57,8 @@ list *convexHull(list *allPoints){
         list_extendStack(hull, upperHull);
 
         // Freeing memory
-        stack_delete(lowerHull);
-        stack_delete(upperHull);
+        stack_delete(&lowerHull);
+        stack_delete(&upperHull);
 
         return hull;
 
