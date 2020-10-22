@@ -11,9 +11,9 @@ typedef struct {
     double y;
 } point;
 
-// Checks if 3 points are counter-clockwise-oriented
+// Checks if 3 points are either collinear or counter-clockwise-oriented
 // Returns True if so and False if no
-boolean isCCW(point p1, point p2, point p3);
+boolean isOriented(point p1, point p2, point p3);
 
 // Returns the lowest in a set of four integers
 int min4(int x, int y, int z, int w);

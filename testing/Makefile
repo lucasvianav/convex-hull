@@ -6,3 +6,7 @@ hullAlgMain:
 	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 hullAlg-main.c ../ATDs/list.c ../ATDs/list.h ../ATDs/stack.c ../ATDs/stack.h ../util.c ../util.h ../monotone-chain.c ../monotone-chain.h -o hullAlg-main
 run-hullAlgMain:
 	./hullAlg-main
+collinearTrioMain:
+	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 collinearTrio.c ../ATDs/list.c ../ATDs/list.h ../ATDs/stack.c ../ATDs/stack.h ../util.c ../util.h ../monotone-chain.c ../monotone-chain.h -o collinearTrio
+run-collinearTrio:
+	./collinearTrio

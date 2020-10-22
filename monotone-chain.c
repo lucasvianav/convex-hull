@@ -27,10 +27,10 @@ list *convexHull(list *allPoints){
             currentPoint = *(list_get(allPoints, i));
 
             // If there's at least 2 points in the stack --> ok
-            // If the last 2 points in the stack and the current point are clockwise-oriented --> ok
+            // If the last 2 points in the stack and the current point are not clockwise-oriented --> ok
             // If ok --> push current point to stack
             // If not ok --> pop a point from stack and check again
-            while(stack_getLength(lowerHull) >= 2 && !isCCW(*(stack_secondFromTop(lowerHull)), *(stack_top(lowerHull)), currentPoint)){
+            while(stack_getLength(lowerHull) >= 2 && !isOriented(*(stack_secondFromTop(lowerHull)), *(stack_top(lowerHull)), currentPoint)){
                 free(stack_pop(lowerHull));
             }
 
@@ -41,7 +41,7 @@ list *convexHull(list *allPoints){
         for(int i = noPoints - 1; i >= 0; i--){
             currentPoint = *(list_get(allPoints, i));
 
-            while(stack_getLength(upperHull) >= 2 && !isCCW(*(stack_secondFromTop(upperHull)), *(stack_top(upperHull)), currentPoint)){
+            while(stack_getLength(upperHull) >= 2 && !isOriented(*(stack_secondFromTop(upperHull)), *(stack_top(upperHull)), currentPoint)){
                 free(stack_pop(upperHull));
             }
 
