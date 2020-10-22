@@ -580,7 +580,7 @@ void list_extend(list *l, list *target){
     return;
 }
 
-/*
+
 void list_extendStack(list *l, stack *target){
     if(l != NULL && target != NULL){
         stack *s = stack_copy(target);
@@ -596,13 +596,8 @@ void list_extendStack(list *l, stack *target){
 
     return;
 }
-<<<<<<< HEAD
-*/
-void list_extendStack(list *l, stack *target){
-=======
 
 void list_attachStack(list *l, stack *target){
->>>>>>> 1e438cec65d2cede699d038f02adef14142c534d
     if(l != NULL && target != NULL){
         int length = stack_getLength(target);
 

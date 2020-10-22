@@ -71,6 +71,8 @@ int list_getLength(list *l);
 // Returns a pointer to the array of points
 point* point_list(list*l);
 
+// Faltou passar esses nomes pro inglês
+
 // Returns left element index from the array
 int indice_esquerda(point* p,int tamanho);
 
