@@ -82,10 +82,10 @@ int indice_cima_lista(list* l);
 // Returns lower element index from the list
 int indice_baixo_lista(list* l);
 
-// Prints clockwise
+// Prints counterclockwise
 void lista_impressao_anti_horaria(list* l, int indice);
 
-// Prints counterclockwise
+// Prints clockwise
 void lista_impressao_horaria(list* l, int indice);
 
 #endif
