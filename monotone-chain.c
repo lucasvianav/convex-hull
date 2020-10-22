@@ -31,7 +31,7 @@ list *convexHull(list *allPoints){
             // If ok --> push current point to stack
             // If not ok --> pop a point from stack and check again
             while(stack_getLength(lowerHull) >= 2 && !isCCW(*(stack_secondFromTop(lowerHull)), *(stack_top(lowerHull)), currentPoint)){
-                stack_pop(lowerHull);
+                free(stack_pop(lowerHull));
             }
 
             stack_push(lowerHull, currentPoint);
@@ -42,15 +42,15 @@ list *convexHull(list *allPoints){
             currentPoint = *(list_get(allPoints, i));
 
             while(stack_getLength(upperHull) >= 2 && !isCCW(*(stack_secondFromTop(upperHull)), *(stack_top(upperHull)), currentPoint)){
-                stack_pop(upperHull);
+                free(stack_pop(upperHull));
             }
 
             stack_push(upperHull, currentPoint);
         }
 
         // The top point from each stack is the bottom point from the other one
-        stack_pop(lowerHull);
-        stack_pop(upperHull);
+        free(stack_pop(lowerHull));
+        free(stack_pop(upperHull));
 
         // Concatenates the stacks into the complete hull (counter-clockwise order)
         list_attachStack(hull, lowerHull);

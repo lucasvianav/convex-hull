@@ -587,7 +587,9 @@ void list_extendStack(list *l, stack *target){
         int length = stack_getLength(s);
 
         for(int i = 0; i < length; i++){
-            list_append(l, *stack_pop(s));
+            point *tmp = stack_pop(s);
+            list_append(l, *tmp);
+            free(tmp);
         }
 
         stack_delete(&s);
@@ -602,7 +604,9 @@ void list_attachStack(list *l, stack *target){
         int length = stack_getLength(target);
 
         for(int i = 0; i < length; i++){
-            list_append(l, *stack_pop(target));
+            point *tmp = stack_pop(target);
+            list_append(l, *tmp);
+            free(tmp);
         }
         
         stack_delete(&target);

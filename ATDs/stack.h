@@ -14,7 +14,8 @@ stack *stack_copy(stack *s);
 void stack_push(stack* s,point p);
 
 // Removes the stack_top node from the stack
-point* stack_pop(stack* s);
+// Returns a pointer to that node's point (must be freed in the application)
+point *stack_pop(stack* s);
 
 // Returns the stack stack_getLength
 int stack_getLength(stack* s);

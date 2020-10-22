@@ -41,16 +41,13 @@ void stack_push(stack* s,point p){
     
 }
 
-point* stack_pop(stack* s){
+point *stack_pop(stack* s){
 
-    if((s == NULL) || stack_is_empty(s)) return NULL;
-
-    int x = s->top->p.x;
-    int y = s->top->p.y;
+    if(s == NULL || stack_is_empty(s)){ return NULL; }
 
     point* return_point = (point*)malloc(sizeof(point));
-    return_point->x = x;
-    return_point->y = y;
+    return_point->x = s->top->p.x;
+    return_point->y = s->top->p.y;
     
     node* aux = s->top; 
     s->top = aux->next;
@@ -115,7 +112,7 @@ stack *stack_copy(stack *s){
 
 void stack_delete(stack **s){
 
-    if ((s == NULL) || stack_is_empty(*s)) return;
+    if ((s == NULL)) return;
 
     node* current = (*s)->top;
     node* next;
