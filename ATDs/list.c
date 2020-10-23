@@ -580,7 +580,6 @@ void list_extend(list *l, list *target){
     return;
 }
 
-
 void list_extendStack(list *l, stack *target){
     if(l != NULL && target != NULL){
         stack *s = stack_copy(target);
@@ -616,155 +615,75 @@ void list_attachStack(list *l, stack *target){
     return;
 }
 
+int list_searchExtreme(list *l, char target){
+    if(l != NULL && (target == 'U' || target == 'D' || target == 'L' || target == 'R')){
+        int targetIndex = 0;
+        point targetPoint = l->start->p;
+        
+        node* aux = l->start;
 
+        for(int i = 0; i < list_getLength(l); i++, aux = aux->next){
 
-int indice_esquerda_lista(list* l){
-
-    int tamanho = list_getLength(l);
-
-    int mais_esquerda = 0;
-    point ponto_mais_esquerda = l->start->p;
-    
-    node* aux = l->start;
-
-    for(int i = 0; i < tamanho; i++){
-        if(aux->p.x < ponto_mais_esquerda.x){
-            mais_esquerda = i;
-            ponto_mais_esquerda = aux->p;
-        }
-        else if(aux->p.x == ponto_mais_esquerda.x){
-            if(aux->p.y < ponto_mais_esquerda.y){
-                mais_esquerda = i;
+            if(
+                (target == 'U' && (aux->p.y > targetPoint.y || (aux->p.y == targetPoint.y && aux->p.x < targetPoint.x))) ||
+                (target == 'L' && (aux->p.x < targetPoint.x || (aux->p.x == targetPoint.x && aux->p.y < targetPoint.y))) ||
+                (target == 'R' && (aux->p.x > targetPoint.x || (aux->p.x == targetPoint.x && aux->p.y < targetPoint.y))) ||
+                (target == 'D' && (aux->p.y < targetPoint.y || (aux->p.y == targetPoint.y && aux->p.x < targetPoint.x)))
+            ){
+                targetPoint = aux->p;
+                targetIndex = i;
             }
+
         }
-        aux = aux->next;
+
+        return targetIndex;
     }
-    return mais_esquerda;
+
+    return -1;
+
 }
 
-int indice_cima_lista(list* l){
+void list_auxPrint(list *l, int orientation, int startIndex){
+    if(l != NULL && (orientation == 0 || orientation == 1) && startIndex >= 0 && startIndex < list_getLength(l)){
+        int i = 0;
+        node* aux = l->start;
 
-    int tamanho = list_getLength(l);
+        while(i != startIndex){
+            aux = aux->next;
+            i++;
+        } 
 
-    int mais_acima = 0;
-    point ponto_mais_acima = l->start->p;
-    
-    node* aux = l->start;
+        switch (orientation){
+            case 0: // Clockwise
+                for (i = startIndex; i >= 0 ; i--, aux = aux->previous){
+                    printf("%.2lf %.2lf\n",aux->p.x,aux->p.y);
+                }
 
-    for(int i = 0; i < tamanho; i++){
-        if(aux->p.y > ponto_mais_acima.y){
-            mais_acima = i;
-            ponto_mais_acima = aux->p;
+                aux = l->end;
+
+                for (i = list_getLength(l) - 1; i > startIndex; i--, aux = aux->previous){
+                    printf("%.2lf %.2lf\n",aux->p.x,aux->p.y);
+                }
+                
+                break;
+            
+            case 1: // Counter-Clockwise
+                for(int i = startIndex; i < list_getLength(l) ; i++, aux = aux->next){
+                    printf("%.2lf %.2lf\n", aux->p.x, aux->p.y);
+                }
+
+                aux = l->start;
+
+                for (int i = 0; i < startIndex; i++, aux = aux->next){
+                    printf("%.2lf %.2lf\n", aux->p.x, aux->p.y);
+                }
+            
+                break;
+
         }
-        else if(aux->p.y == ponto_mais_acima.y){
-            if(aux->p.x < ponto_mais_acima.x){
-                mais_acima = i;
-            }
-        }
-        aux = aux->next;
+
     }
-    return mais_acima;
-}
 
-int indice_baixo_lista(list* l){
-
-    int tamanho = list_getLength(l);
-
-    int mais_abaixo = 0;
-    point ponto_mais_abaixo = l->start->p;
-    
-    node* aux = l->start;
-
-    for(int i = 0; i < tamanho; i++){
-        if(aux->p.y < ponto_mais_abaixo.y){
-            mais_abaixo = i;
-            ponto_mais_abaixo = aux->p;
-        }
-        else if(aux->p.y == ponto_mais_abaixo.y){
-            if(aux->p.x < ponto_mais_abaixo.x){
-                mais_abaixo = i;
-            }
-        }
-        aux = aux->next;
-    }
-    return mais_abaixo;
-    
-}
-
-int indice_direita_lista(list* l){
-
-    int tamanho = list_getLength(l);
-
-    int mais_direita = 0;
-    point ponto_mais_direita = l->start->p;
-    
-    node* aux = l->start;
-
-    for(int i = 0; i < tamanho; i++){
-        if(aux->p.x > ponto_mais_direita.x){
-            mais_direita = i;
-            ponto_mais_direita = aux->p;
-        }
-        else if(aux->p.x == ponto_mais_direita.x){
-            if(aux->p.y < ponto_mais_direita.y){
-                mais_direita = i;
-            }
-        }
-        aux = aux->next;
-    }
-    return mais_direita;
-}
-
-void lista_impressao_anti_horaria(list* l, int indice){
-
-    int tamanho = list_getLength(l);
-
-    int i = 0;
-    node* aux = l->start;
-
-    while(i != indice){
-        aux = aux->next;
-        i++;
-    } 
-
-    for (int i = indice; i < tamanho ; i++){
-                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
-                aux = aux->next;
-            }
-
-            aux = l->start;
-
-            for (int i = 0; i < indice; i++){
-                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
-                aux = aux->next;
-            }
-    
     return;
-}
 
-void lista_impressao_horaria(list* l, int indice){
-
-    int tamanho = list_getLength(l);
-
-    int i = 0;
-    node* aux = l->start;
-
-    while(i != indice){
-        aux = aux->next;
-        i++;
-    } 
-
-    for (int i = indice; i >= 0 ; i--){
-                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
-                aux = aux->previous;
-            }
-
-            aux = l->end;
-
-            for (int i = tamanho - 1; i > indice; i--){
-                printf("%.2f %.2f\n",aux->p.x,aux->p.y);
-                aux = aux->previous;
-            }
-    
-    return;
 }

@@ -38,12 +38,19 @@ void list_remove(list *l, int index);
 // Swaps the elements at the specified indexes
 void list_swap(list *l, int i, int j);
 
-// Prints all the list's elements
+// Prints all of the list's elements
 void list_print(list *l);
+
+// Prints the list's elements in specific order starting at the on in startIndex
+// If orientation == 0: Prints the element at startIndex and then the previous ones
+// After that, print the last element and then the previous ones until every element was printed
+// If orientation == 1: Prints the element at startIndex and then the next ones
+// After that, print the first element and then the next ones until every element was printed
+// If l is counter-clockwise-oriented, 0 means clockwise and 1 means counter-clockwise
+void list_auxPrint(list *l, int orientation, int startIndex);
 
 // Reverses the element's order
 void list_reverse(list *l);
-
 
 // Shuffles the list using the Fisher-Yates algorithm
 void list_shuffle(list *l);
@@ -62,30 +69,19 @@ boolean list_isEmpty(list *l);
 point *list_get(list *l, int index);
 
 // Returns the index of the specified element
-// If the element isn't on the list, returns -1
+// If the element isn't on the list or an error happens, returns -1
 int list_search(list *l, point p);
 
+// Returns the index of the specified extreme point
+// U: uppermost point
+// L: leftmost point
+// R: rightmost point
+// D: bottommost point (down)
+// If an error happens, returns -1
+int list_searchExtreme(list *l, char target);
+
 // Returns the list's length
+// If an error happens, returns -1
 int list_getLength(list *l);
-
-// Faltou passar esses nomes pro inglês
-
-// Returns left element index from the list
-int indice_esquerda_lista(list* l);
-
-// Returns right element index from the list
-int indice_direita_lista(list* l);
-
-// Returns upper element index from the list
-int indice_cima_lista(list* l);
-
-// Returns lower element index from the list
-int indice_baixo_lista(list* l);
-
-// Prints counterclockwise
-void lista_impressao_anti_horaria(list* l, int indice);
-
-// Prints clockwise
-void lista_impressao_horaria(list* l, int indice);
 
 #endif
