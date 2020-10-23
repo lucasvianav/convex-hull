@@ -212,20 +212,17 @@ void list_remove(list *l, int index){
     return;
 }
 
-// Auxiliar local function to deallocate all the list's nodes as recursion 
-void deallocate(node **n){
-    // If n ain't the list's last node, calls itself on the next node
-    if(*n != NULL && (*n)->next != NULL){ deallocate(&((*n)->next)); }
-
-    free(*n);
-    *n = NULL;
-
-    return;
-}
-
 void list_delete(list **l){
     if(*l != NULL){
-        deallocate(&((*l)->start)); // Deallocates all the list's nodes
+        node *tmp = (*l)->end, *aux;
+
+        for(int i = list_getLength(*l)-1; i >= 0; i--){
+            aux = tmp;
+            tmp = tmp->previous;
+
+            free(aux);
+            aux = NULL;
+        }
 
         free(*l);
         *l = NULL;

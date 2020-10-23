@@ -8,7 +8,7 @@
 int main(){
     int noPoints; // Total number of points
     char outputStart; // In which element the output must start
-    int outputOrientation;
+    int outputOrientation; // Clockwise x Counter-Clockwise
     float pointsPercentage; // Fraction between points on the hull and the whole
 
     list* allPoints = list_create();
