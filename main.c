@@ -4,6 +4,7 @@
 #include "./ATDs/stack.h"
 #include "./ATDs/list.h"
 #include "monotone-chain.h"
+#include "./time/tempo.h"
 
 int main(){
     int noPoints; // Total number of points
@@ -28,8 +29,12 @@ int main(){
     scanf(" %c", &outputStart);
     scanf("%d", &outputOrientation);
 
+    double start = seconds();
+
     // Gets this group of points' convex hull
     list* hull = convexHull(allPoints);
+
+    double end = seconds() - start;
 
     // Calculates the percentage
     pointsPercentage = 100*((float) list_getLength(hull) / (float) list_getLength(allPoints));
@@ -41,6 +46,17 @@ int main(){
     // Frees allocated memory
     list_delete(&allPoints);
     list_delete(&hull);
+
+    // Writes the time necessary to calculate the convex hull
+    FILE* archive = fopen("tmp.txt", "w");
+    
+    if(archive == NULL) {
+        return 1;
+    }
+
+    fprintf(archive,"Time to calculate the hull: %lf",end);
+
+    fclose(archive);
 
     return 0;
 }
