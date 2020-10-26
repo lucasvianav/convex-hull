@@ -29,6 +29,7 @@ int main(){
     scanf(" %c", &outputStart);
     scanf("%d", &outputOrientation);
 
+    // Registers the time necessary to calculate the hull
     double start = seconds();
 
     // Gets this group of points' convex hull
