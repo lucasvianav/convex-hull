@@ -1,1 +1,1 @@
-Time to calculate the hull: 2473.341519
+Time to calculate the hull: 2541.502824
