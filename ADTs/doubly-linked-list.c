@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "list.h"
+#include "doubly-linked-list.h"
 #include "stack.h"
 
 struct node_ {

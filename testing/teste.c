@@ -1,9 +1,9 @@
-// gcc -Wall -Werror -std=c99 teste.c ATDs/list.c ATDs/stack.c monotone-chain.c util.c -o teste -lm
+// gcc -Wall -Werror -std=c99 teste.c ADTs/list.c ADTs/stack.c monotone-chain.c util.c -o teste -lm
 #include <stdio.h>
 #include <stdlib.h>
 #include "../util.h"
-#include "../ATDs/stack.h"
-#include "../ATDs/list.h"
+#include "../ADTs/stack.h"
+#include "../ADTs/list.h"
 #include "../monotone-chain.h"
 #include <math.h>
 

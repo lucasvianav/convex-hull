@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "monotone-chain.h"
-#include "./ATDs/stack.h"
+#include "./ADTs/stack.h"
 #include "util.h"
 
 list *convexHull(list *allPoints){
     int noPoints = list_getLength(allPoints);
 
     if(noPoints > 3){
-
-        // Full convex hull
-        list *hull = list_create();
 
         // Convex hull's upper and lower sections
         stack *upperHull = stack_create();
@@ -51,6 +48,9 @@ list *convexHull(list *allPoints){
         // The top point from each stack is the bottom point from the other one
         free(stack_pop(lowerHull));
         free(stack_pop(upperHull));
+
+        // Full convex hull
+        list *hull = list_create(stack_getLength(lowerHull) + stack_getLength(upperHull));
 
         // Concatenates the stacks into the complete hull (counter-clockwise order)
         list_attachStack(hull, lowerHull);

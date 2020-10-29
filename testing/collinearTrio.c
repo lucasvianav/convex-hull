@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../util.h"
-#include "../ATDs/list.h"
+#include "../ADTs/list.h"
 #include "../monotone-chain.h"
 
 #define NO_OF_POINTS 8
