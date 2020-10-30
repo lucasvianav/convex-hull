@@ -29,14 +29,14 @@ int main(){
     scanf(" %c", &outputStart);
     scanf("%d", &outputOrientation);
 
-    // // Start timer
-    // double interval = seconds();
+    // Start timer
+    double interval = seconds();
 
     // Gets this group of points' convex hull
     list* hull = convexHull(allPoints);
 
-    // // Time interval used to calculate the hull
-    // interval = seconds() - interval;
+    // Time interval used to calculate the hull
+    interval = seconds() - interval;
 
     // Calculates the percentage
     pointsPercentage = 100*((float) list_getLength(hull) / (float) noPoints);
@@ -54,15 +54,15 @@ int main(){
     list_delete(&allPoints);
     list_delete(&hull);
 
-    // // Opens file in which the time interval measured'll be written
-    // FILE* f = fopen("./results/time-intervals.out", "a");
-    // if(f == NULL) { return 1; }
+    // Opens file in which the time interval measured'll be written
+    FILE* f = fopen("./results/time-intervals.out", "a");
+    if(f == NULL) { return 1; }
 
-    // // Writes time interval to file
-    // fprintf(f,"Input size: %15d | Time interval: %15lfs\n", noPoints, interval);
+    // Writes time interval to file
+    fprintf(f,"Input size: %15d | Time interval: %15lfs\n", noPoints, interval);
 
-    // // Closes the file
-    // fclose(f);
+    // Closes the file
+    fclose(f);
 
     return 0;
 }
