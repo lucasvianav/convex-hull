@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include "util.h"
 
+// Checks the orientation of the points, if they are counterclockwise or not
 boolean isOriented(point p1, point p2, point p3){
     double triangleArea = p1.x * p2.y + p1.y * p3.x + p2.x * p3.y - p3.x * p2.y - p3.y * p1.x - p2.x * p1.y;
 
@@ -14,6 +15,7 @@ boolean isOriented(point p1, point p2, point p3){
     }
 }
 
+// Returns the minimun value between 4 points
 int min4(int x, int y, int z, int w){
     if(x <= y && x <= z && x <= w){ return x; }
 
@@ -64,12 +66,14 @@ boolean cmpPoints(point p1, point p2, char key){
     return False;
 }
 
+// Prints the x and y value of the point
 void printPoint(point p){
     printf("(%.2lf, %.2lf)\n", p.x, p.y);
 
     return;
 }
 
+// If the character is in Uppercase, returns the Lowercase version and vice versa
 char toggleChar(char c){
     if(isupper(c)){ return tolower(c); }
 

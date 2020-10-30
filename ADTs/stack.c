@@ -11,9 +11,10 @@ typedef struct node_ node;
 
 struct stack_ {
     node *top;
-    int size;
+    int size; // Size at the moment
 };
 
+// Creates an empty stack
 stack* stack_create(){
     
     stack *new_stack = (stack *)malloc(sizeof(stack));
@@ -26,6 +27,7 @@ stack* stack_create(){
     return new_stack;
 }
 
+// Inserts a point at the top of the stack
 void stack_push(stack* s,point p){
 
     if(s == NULL) return;
@@ -41,6 +43,7 @@ void stack_push(stack* s,point p){
     
 }
 
+// Removes the point from the top of the stack and returns it
 point *stack_pop(stack* s){
 
     if(s == NULL || stack_isEmpty(s)){ return NULL; }
@@ -59,6 +62,7 @@ point *stack_pop(stack* s){
     return return_point;
 }
 
+// Gets the length of the stack at the moment
 int stack_getLength(stack* s){
 
     if(s == NULL) return -1;
@@ -67,6 +71,7 @@ int stack_getLength(stack* s){
 
 }
 
+// Checks if the size of the stack is 0
 int stack_isEmpty(stack *s){
 
     if(s == NULL) return -1;
@@ -75,6 +80,7 @@ int stack_isEmpty(stack *s){
 
 }
 
+// Returns the point from the top of the stack without removing it 
 point *stack_top(stack* s){
     
     if(s == NULL) return NULL;
@@ -82,6 +88,7 @@ point *stack_top(stack* s){
     return &(s->top->p);
 }
 
+// Returns the second element from the top of the stack
 point* stack_secondFromTop(stack* s){
 
     if (s == NULL) return NULL;
@@ -90,6 +97,7 @@ point* stack_secondFromTop(stack* s){
 
 }
 
+// Copies the stack
 stack *stack_copy(stack *s){
     if(s != NULL){
         stack *copy = stack_create();
@@ -110,6 +118,7 @@ stack *stack_copy(stack *s){
 
 }
 
+// Deletes the stack
 void stack_delete(stack **s){
 
     if ((s == NULL)) return;
@@ -132,6 +141,7 @@ void stack_delete(stack **s){
 
 }
 
+// Prints the whole stack
 void stack_print(stack *s){
     if(s != NULL && !stack_isEmpty(s)){
         node *tmp  = s->top;
