@@ -43,7 +43,7 @@ void stack_push(stack* s,point p){
 
 point *stack_pop(stack* s){
 
-    if(s == NULL || stack_is_empty(s)){ return NULL; }
+    if(s == NULL || stack_isEmpty(s)){ return NULL; }
 
     point* return_point = (point*)malloc(sizeof(point));
     return_point->x = s->top->p.x;
@@ -67,7 +67,7 @@ int stack_getLength(stack* s){
 
 }
 
-int stack_is_empty(stack *s){
+int stack_isEmpty(stack *s){
 
     if(s == NULL) return -1;
 
@@ -127,6 +127,20 @@ void stack_delete(stack **s){
 
     free(*s);
     *s = NULL;
+
+    return;
+
+}
+
+void stack_print(stack *s){
+    if(s != NULL && !stack_isEmpty(s)){
+        node *tmp  = s->top;
+
+        while(tmp != NULL){
+            printf("%.2lf %.2lf\n", tmp->p.x, tmp->p.y);
+            tmp = tmp->next;
+        }
+    }
 
     return;
 

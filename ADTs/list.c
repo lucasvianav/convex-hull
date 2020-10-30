@@ -210,7 +210,9 @@ void list_attachStack(list *l, stack *target){
     // If the list has enough free memory for all of the stack's points
     // Append all of the stack's elements to the list
     if(l != NULL && target != NULL && l->maxLength - l->length >= stack_getLength(target)){
-        for(int i = 0; i < stack_getLength(target); i++){
+        int length = stack_getLength(target);
+
+        for(int i = 0; i < length; i++){
             point *tmp = stack_pop(target);
             list_append(l, *tmp);
             free(tmp);

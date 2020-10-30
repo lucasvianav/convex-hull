@@ -21,7 +21,7 @@ point *stack_pop(stack* s);
 int stack_getLength(stack* s);
 
 // Returns if the stack is empty or not
-int stack_is_empty(stack *s);
+int stack_isEmpty   (stack *s);
 
 // Returns the stack_top point from the stack
 point *stack_top(stack* s);
@@ -31,5 +31,7 @@ point* stack_secondFromTop(stack* s);
 
 // Deletes the whole stack
 void stack_delete(stack **s);
+
+void stack_print(stack *s);
 
 #endif

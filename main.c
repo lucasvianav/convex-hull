@@ -39,7 +39,7 @@ int main(){
     // interval = seconds() - interval;
 
     // Calculates the percentage
-    pointsPercentage = 100*((float) list_getLength(hull) / (float) list_getLength(allPoints));
+    pointsPercentage = 100*((float) list_getLength(hull) / (float) noPoints);
 
     // Sorts the list accordingly to input specifications
     list_orientate(hull, outputOrientation, list_searchExtreme(hull, outputStart)); 
