@@ -1,3 +1,7 @@
+/*
+    Daniel Carvalho Dantas  10685702
+    Lucas Viana Vilela      10748409
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "util.h"

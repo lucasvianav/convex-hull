@@ -1,3 +1,7 @@
+/*
+    Daniel Carvalho Dantas  10685702
+    Lucas Viana Vilela      10748409
+*/
 #ifndef STACK_H
 #define STACK_H
 

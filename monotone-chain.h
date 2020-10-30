@@ -1,3 +1,7 @@
+/*
+    Daniel Carvalho Dantas  10685702
+    Lucas Viana Vilela      10748409
+*/
 #include "ADTs/list.h"
 
 // Applies the Monotone Chain algorithm to calculate a group of points's convex hull
