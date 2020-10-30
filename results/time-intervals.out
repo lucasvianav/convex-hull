@@ -48,3 +48,5 @@ Input size:         1000000 | Time interval:        1.896971s
 Input size:         1000000 | Time interval:        1.886982s
 Input size:         1000000 | Time interval:        1.895204s
 Input size:         1000000 | Time interval:        1.923576s
+
+Input size:          100000 | Time interval:        0.139591s

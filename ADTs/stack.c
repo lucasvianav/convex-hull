@@ -92,7 +92,33 @@ point *stack_top(stack* s){
     return &(s->top->p);
 }
 
-// Returns the second element from the top of the stack
+/*
+    Returns the second element from the top stack, but only accessing the top element.
+    The top element from the original stack stays in an auxiliary variable ,and after 
+    the top element at the moment is accessed, the original top element back. 
+
+*/
+
+// FUNÇÃO DANDO ERRO EM CASOS MAIORES 
+// FUNCIONA PARA OS MENORES SEM AS FLAGS DE PONTEIROS
+point* stack_secondFromTop(stack* s){
+
+    if (stack_getLength(s) < 2) return NULL;
+
+    point* aux = stack_pop(s);
+    point* top = stack_top(s);
+
+    stack_push(s,*aux);
+    
+    free(aux);
+
+    return top;
+}
+
+/*
+
+FUNÇÃO FUNCIONANDO NORMALMENTE
+
 point* stack_secondFromTop(stack* s){
 
     if (s == NULL) return NULL;
@@ -100,6 +126,7 @@ point* stack_secondFromTop(stack* s){
     return &(s->top->next->p);
 
 }
+*/
 
 // Copies the stack
 stack *stack_copy(stack *s){
