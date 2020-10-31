@@ -89,3 +89,10 @@ char toggleChar(char c){
 
     else{ return toupper(c); }
 }
+
+// Returns the absolute value of a double
+double dabs(double e){
+    if(e < 0){ e *= -1; }
+
+    return e;
+}

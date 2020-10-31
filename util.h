@@ -35,4 +35,7 @@ void printPoint(point p);
 // Lowercase 'x' -> Uppercase 'X' // Uppercase 'X' -> Lowercase 'x'
 char toggleChar(char c);
 
+// Returns the absolute value of a double
+double dabs(double e);
+
 #endif

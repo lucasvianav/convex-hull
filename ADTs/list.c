@@ -328,7 +328,7 @@ boolean list_isCollinear(list *l){
             // then the points aren't all collinear
             for(int i = 0; i < length; i++){
                 C = *list_get(l, i);
-                if(abs(C.y - m*C.x - n) > 0.0000000000000000001){ return False; }
+                if(dabs(C.y - m*C.x - n) > 0.000000000001){ return False; }
             }
         }
 
