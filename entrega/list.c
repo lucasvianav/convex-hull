@@ -307,3 +307,33 @@ void list_orientate(list *l, int orientation, int startIndex){
 
     return;
 }
+
+boolean list_isCollinear(list *l){
+    if(l != NULL && !list_isEmpty(l)){
+        int length = list_getLength(l);
+
+        // Only 2 points are alway collinear
+        if(length > 2){
+            point A = *list_get(l, 0); // first point on the list 
+            point B = *list_get(l, length - 1); // last point on the list
+            point C; // current point being checked
+
+            // line's equation: y - mx - n = 0
+            // line between points A and B
+            double m = (A.y - B.y)/(A.x - B.x);
+            double n = A.y - m*A.x;
+
+            // Checks if there's at least one element that
+            // doesn't belong to that line. If there is,
+            // then the points aren't all collinear
+            for(int i = 0; i < length; i++){
+                C = *list_get(l, i);
+                if(abs(C.y - m*C.x - n) > 0.0000000000000000001){ return False; }
+            }
+        }
+
+        return True;
+    }
+
+    return False;
+}

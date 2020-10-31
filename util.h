@@ -10,10 +10,11 @@
 #define False 0
 
 // (x, y)
-typedef struct {
+struct point_ {
     double x;
     double y;
-} point;
+};
+typedef struct point_ point;
 
 // Checks if 3 points are either collinear or counter-clockwise-oriented
 // Returns True if so and False if no

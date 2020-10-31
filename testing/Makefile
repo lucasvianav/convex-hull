@@ -18,3 +18,7 @@ stack:
 	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 stack_secondFromTop.c ../ADTs/stack.c ../ADTs/stack.h ../util.c ../util.h -o stack_secondFromTop
 run-stack:
 	./stack_secondFromTop
+collinearCheckMain:
+	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 collinearCheck.c ../ADTs/stack.c ../ADTs/stack.h ../ADTs/list.c ../ADTs/list.h ../util.c ../util.h -o collinearCheck
+run-collinearCheckMain:
+	./collinearCheck

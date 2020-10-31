@@ -8,8 +8,10 @@
 
 // Checks the orientation of the points, if they are counterclockwise or not
 boolean isOriented(point p1, point p2, point p3){
+    // Calculates the triangle formed between the three points' area
     double triangleArea = p1.x * p2.y + p1.y * p3.x + p2.x * p3.y - p3.x * p2.y - p3.y * p1.x - p2.x * p1.y;
 
+    // If the area is <= 0, they're either collinear or counter-clockwise-oriented
     if(triangleArea <= 0){
         return True;
     }
@@ -33,6 +35,7 @@ int min4(int x, int y, int z, int w){
 boolean cmpPoints(point p1, point p2, char key){
     if(key == 'x' || key == 'X' || key == 'y' || key == 'Y'){
     
+        // 'x' checks if p1 is to the lower-left of p2
         if( key == 'x' && p1.x <= p2.x){
             if(p1.x == p2.x && p1.y >= p2.y){
                 return False;
@@ -41,6 +44,7 @@ boolean cmpPoints(point p1, point p2, char key){
             return True;
         }
         
+        // 'X' checks if p2 is to to upper-right of p2
         if( key == 'X' && p1.x >= p2.x){
             if(p1.x == p2.x && p1.y <= p2.y){
                 return False;
@@ -49,6 +53,7 @@ boolean cmpPoints(point p1, point p2, char key){
             return True;
         }
         
+        // 'y' checks if p1 is to the leftmost-bottom of p2
         if( key == 'y' && p1.y <= p2.y){
             if(p1.y == p2.y && p1.x >= p2.x){
                 return False;
@@ -57,6 +62,7 @@ boolean cmpPoints(point p1, point p2, char key){
             return True;
         }
         
+        // 'Y' checks if p1 is to the rightmost-top of p2
         if( key == 'Y' && p1.y >= p2.y){
             if(p1.y == p2.y && p1.x <= p2.x){
                 return False;

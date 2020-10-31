@@ -42,21 +42,32 @@ int main(){
     // // Time interval used to calculate the hull
     // interval = seconds() - interval;
 
-    // Calculates the percentage
-    pointsPercentage = 100*((float) list_getLength(hull) / (float) noPoints);
+    // If the hull is null, it means the algorithm wasn't able
+    // to determine the hull (because all points are collinear)
+    if(hull == NULL){
+        printf("ERRO\n");
+    }
 
-    // Sorts the list accordingly to input specifications
-    list_orientate(hull, outputOrientation, list_searchExtreme(hull, outputStart)); 
+    // If a convex hull weas successfully determined
+    else{
+        // Calculates the percentage
+        pointsPercentage = 100*((float) list_getLength(hull) / (float) noPoints);
 
-    // Prints the hull according to designated output format (starting point and orientation)
-    list_print(hull);
+        // Sorts the list accordingly to input specifications
+        list_orientate(hull, outputOrientation, list_searchExtreme(hull, outputStart)); 
 
-    // Prints the percentage
-    printf("%.2f\n", pointsPercentage);
+        // Prints the hull according to designated output format (starting point and orientation)
+        list_print(hull);
+
+        // Prints the percentage
+        printf("%.2f\n", pointsPercentage);
+
+        // Frees allocated memory
+        list_delete(&hull);
+    }
 
     // Frees allocated memory
     list_delete(&allPoints);
-    list_delete(&hull);
 
     // // Opens file in which the time interval measured'll be written
     // FILE* f = fopen("./results/time-intervals.out", "a");

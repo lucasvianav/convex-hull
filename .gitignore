@@ -1,6 +1,8 @@
-.vscode/
+vscode/
 .vscode/*
 .vscode/settings.json
+entrega/
+entrega/*
 
 # Prerequisites
 *.d

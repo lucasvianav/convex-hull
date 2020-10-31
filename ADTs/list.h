@@ -58,6 +58,9 @@ boolean list_isEmpty(list *l);
 // Return True if the list is empty or False if it isn't
 boolean list_isFull(list *l);
 
+// Checks if all points in a list are collinear
+boolean list_isCollinear(list *l);
+
 // Returns a pointer to the element at the specified index
 point *list_get(list *l, int index);
 

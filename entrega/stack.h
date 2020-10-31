@@ -10,32 +10,31 @@
 typedef struct stack_ stack;
 
 // Creates a stack and returns it's pointer
-stack* stack_create();
+stack *stack_create();
 
-stack *stack_copy(stack *s);
+// Appends a new point to the top of the stack
+void stack_push(stack *s, point p);
 
-// Inserts a new node 
-void stack_push(stack* s,point p);
+// Removes the point from the top of the stack
+// Returns a pointer to that point's value (must be freed in the application)
+point *stack_pop(stack *s);
 
-// Removes the stack_top node from the stack
-// Returns a pointer to that node's point (must be freed in the application)
-point *stack_pop(stack* s);
+// Returns the stack's length
+// If an error occurs, return -1
+int stack_getLength(stack *s);
 
-// Returns the stack stack_getLength
-int stack_getLength(stack* s);
+// Returns True if the stack is empty
+// or False if it isn't
+boolean stack_isEmpty(stack *s);
 
-// Returns if the stack is empty or not
-int stack_isEmpty   (stack *s);
+// Returns a pointer to the point on top of the stack
+point *stack_top(stack *s);
 
-// Returns the stack_top point from the stack
-point *stack_top(stack* s);
-
-// Returns the stack second element from the top
-point* stack_secondFromTop(stack* s);
+// Returns a pointer to the second point from the stack's top
+// (must be freed in the application)
+point *stack_secondFromTop(stack *s);
 
 // Deletes the whole stack
 void stack_delete(stack **s);
-
-void stack_print(stack *s);
 
 #endif

@@ -9,9 +9,10 @@
 #include "util.h"
 
 list *convexHull(list *allPoints){
-    int noPoints = list_getLength(allPoints);
-
-    if(noPoints > 3){
+    // If the list contains only 2 or fewer points they're always collinear
+    // If the list contains only collinear points, then a hull can't be determined
+    if(!list_isCollinear(allPoints)){
+        int noPoints = list_getLength(allPoints);
 
         // Convex hull's upper and lower sections
         stack *upperHull = stack_create();
@@ -82,6 +83,6 @@ list *convexHull(list *allPoints){
 
     }
 
-    return allPoints;
+    return NULL;
 
 }
