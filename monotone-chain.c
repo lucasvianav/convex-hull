@@ -19,26 +19,31 @@ list *convexHull(list *allPoints){
         stack *lowerHull = stack_create();
 
         // In-focus point
-        point currentPoint, *auxPoint = NULL;
+        point currentPoint;
+
+        // Auxiliar variable that'll store
+        // the second point from the top of the stack
+        point *auxPoint = NULL;
 
         // Sorts the set of points from left to right (and bottom to top if there's a tie)
         list_sort(allPoints, 'x');
 
         // Lower Hull construction
         for(int i = 0; i < noPoints; i++){
-            currentPoint = *(list_get(allPoints, i));
-            if(stack_getLength(lowerHull) >= 2){ auxPoint = stack_secondFromTop(lowerHull); }
+            currentPoint = *(list_get(allPoints, i)); // Current point on the list
+            if(stack_getLength(lowerHull) >= 2){ auxPoint = stack_secondFromTop(lowerHull); } // Second point from the top of the stack
 
-            // If there's at least 2 points in the stack --> ok
-            // If the last 2 points in the stack and the current point are not clockwise-oriented --> ok
-            // If ok --> push current point to stack
-            // If not ok --> pop a point from stack and check again
+            // If there's lees than 2 points in the stack --> the current point is ok
+            // If the last 2 points in the stack and the current point are not clockwise-oriented --> the current point is ok
+            // If the current point is ok --> push it to the stack
+            // If the current point is not ok --> pop a point from the stack and check again (and get new second point from the top)
             while(stack_getLength(lowerHull) >= 2){
                 if(!isOriented(*auxPoint, *(stack_top(lowerHull)), currentPoint)){
                     free(stack_pop(lowerHull));
                     free(auxPoint);
                     if(stack_getLength(lowerHull) >= 2){ auxPoint = stack_secondFromTop(lowerHull); }
                 }
+
                 else{
                     free(auxPoint);
                     break;
@@ -59,6 +64,7 @@ list *convexHull(list *allPoints){
                     free(auxPoint);
                     if(stack_getLength(lowerHull) >= 2){ auxPoint = stack_secondFromTop(upperHull); }
                 }
+
                 else{
                     free(auxPoint);
                     break;
