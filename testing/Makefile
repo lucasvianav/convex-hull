@@ -14,3 +14,7 @@ collinearTrioMain:
 	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 collinearTrio.c ../ADTs/list.c ../ADTs/list.h ../ADTs/stack.c ../ADTs/stack.h ../util.c ../util.h ../monotone-chain.c ../monotone-chain.h -o collinearTrio
 run-collinearTrio:
 	./collinearTrio
+stack:
+	gcc -g3 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -Wall -Werror -std=c99 stack_secondFromTop.c ../ADTs/stack.c ../ADTs/stack.h ../util.c ../util.h -o stack_secondFromTop
+run-stack:
+	./stack_secondFromTop

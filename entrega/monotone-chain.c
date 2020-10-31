@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "monotone-chain.h"
-#include "./ADTs/stack.h"
+#include "stack.h"
 #include "util.h"
 
 list *convexHull(list *allPoints){

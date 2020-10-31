@@ -50,3 +50,8 @@ Input size:         1000000 | Time interval:        1.895204s
 Input size:         1000000 | Time interval:        1.923576s
 
 Input size:          100000 | Time interval:        0.139591s
+Input size:          200000 | Time interval:        0.416384s
+Input size:          200000 | Time interval:        0.415700s
+Input size:          200000 | Time interval:        0.845090s
+Input size:          200000 | Time interval:        0.827942s
+Input size:          200000 | Time interval:        0.832960s

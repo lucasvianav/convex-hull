@@ -33,7 +33,7 @@ boolean list_isEmpty(list *l){
 }
 
 boolean list_isFull(list *l){
-    if(l == NULL || l->length >= l->maxLength){ return False; }
+    if(l == NULL || l->length < l->maxLength){ return False; }
 
     else{ return True; }
 }
@@ -56,7 +56,7 @@ void list_append(list *l, point p){
 void list_insert(list *l, point p, int index){
     if(l != NULL && !list_isFull(l) && index <= list_getLength(l)){
         // Moves every point with index >= target index to the next position
-        for(int i = list_getLength(l) - 1; i <= index; i--){
+        for(int i = list_getLength(l) - 1; i >= index; i--){
             l->points[i+1] = l->points[i];
         }
 
@@ -66,6 +66,8 @@ void list_insert(list *l, point p, int index){
         // Increments list length
         l->length++;
     }
+
+    return;
 }
 
 void list_remove(list *l, int index){
@@ -79,6 +81,8 @@ void list_remove(list *l, int index){
         // Decrements the list's length
         l->length--;
     }
+
+    return;
 }
 
 point *list_get(list *l, int index){
@@ -107,8 +111,8 @@ int list_search(list *l, point p){
 void list_delete(list **l){
     if(l != NULL){
         // Deallocates the array's memory
-        // free((*l)->points);
-        // (*l)->points = NULL;
+        free((*l)->points);
+        (*l)->points = NULL;
 
         // Deallocates the list's memory
         free(*l);
@@ -210,7 +214,9 @@ void list_attachStack(list *l, stack *target){
     // If the list has enough free memory for all of the stack's points
     // Append all of the stack's elements to the list
     if(l != NULL && target != NULL && l->maxLength - l->length >= stack_getLength(target)){
-        for(int i = 0; i < stack_getLength(target); i++){
+        int length = stack_getLength(target);
+
+        for(int i = 0; i < length; i++){
             point *tmp = stack_pop(target);
             list_append(l, *tmp);
             free(tmp);

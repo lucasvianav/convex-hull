@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "util.h"
-#include "./ADTs/stack.h"
-#include "./ADTs/list.h"
+#include "stack.h"
+#include "list.h"
 #include "monotone-chain.h"
 // #include "./time/tempo.h"
 
